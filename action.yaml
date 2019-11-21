@@ -1,0 +1,15 @@
+name: "Code Review Assistant - Salesforce B2C Metadata Linter"
+
+inputs:
+    xsdsPath:
+        required: true
+    xmlsPath:
+        required: true
+    azureAccount:
+        required: true
+    azureKey:
+        required: true
+
+runs:
+    using: "node12"
+    main: "dist/index.js"
