@@ -2,8 +2,11 @@ const path = require("path");
 const core = require("@actions/core");
 const exec = require("@actions/exec");
 const io = require("@actions/io");
-const uuidV4 = require("uuid/v4");
-const { BlobServiceClient, StorageSharedKeyCredential } = require("@azure/storage-blob");
+const { v4: uuidV4 } = require("uuid");
+const {
+    BlobServiceClient,
+    StorageSharedKeyCredential,
+} = require("@azure/storage-blob");
 
 async function run() {
     try {
@@ -24,8 +27,14 @@ async function run() {
         const jarVer = "1.1.0";
         const blobURL = `https://${azureAccount}.blob.core.windows.net`;
 
-        const azureCredentials = new StorageSharedKeyCredential(azureAccount, azureKey);
-        const blobServiceClient = new BlobServiceClient(blobURL, azureCredentials);
+        const azureCredentials = new StorageSharedKeyCredential(
+            azureAccount,
+            azureKey
+        );
+        const blobServiceClient = new BlobServiceClient(
+            blobURL,
+            azureCredentials
+        );
         const containerClient = blobServiceClient.getContainerClient("jars");
 
         const blobName = `salesforceb2c-metadata-linter-${jarVer}.jar`;
@@ -41,7 +50,7 @@ async function run() {
             jarPath,
             `--xsds-path=${xsdsPath}`,
             `--xmls-path=${xmlsPath}`,
-            `--annotations-type=GITHUB_ACTIONS`
+            `--annotations-type=GITHUB_ACTIONS`,
         ]);
     } catch (e) {
         core.setFailed(e.message);
