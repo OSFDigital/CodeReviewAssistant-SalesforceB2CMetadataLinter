@@ -1,5 +1,6 @@
 # Code Review Assistant - Salesforce B2C Metadata Linter
 
+
 ```yaml
     - name: SalesforceB2CMetadataLinter
       uses: OSFGlobal/CodeReviewAssistant-SalesforceB2CMetadataLinter@master
